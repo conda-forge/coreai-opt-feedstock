@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.2.0"
+  version: "0.2.1"
 
 package:
   name: coreai-opt
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/coreai-opt/coreai_opt-${{ version }}.tar.gz
-  sha256: 2b8829c42c7bb6b88bd056094c3d9dbae23c3bba3bb18773edf9d66582609ebc
+  sha256: ef1cc372a1f5fb91b8824aecf9282742ee490a9eea966561738fa6fc471e4942
 
 build:
   number: 0
