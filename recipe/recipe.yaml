@@ -10,6 +10,10 @@ package:
 source:
   url: https://pypi.org/packages/source/c/coreai-opt/coreai_opt-${{ version }}.tar.gz
   sha256: 996657cc4f85438d0f4a33b1657bb469d040a1b5161388c8dd481aba4c0c67f0
+  patches:
+    # The conda-forge `ninja` package ships no pip metadata, so `pip check`
+    # complains about the declared runtime dependency on ninja.
+    - patches/0001-drop-ninja-from-install-requires.patch
 
 build:
   number: 0
