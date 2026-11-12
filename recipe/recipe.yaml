@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.2.1"
+  version: 0.4.0
 
 package:
   name: coreai-opt
@@ -9,7 +9,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/coreai-opt/coreai_opt-${{ version }}.tar.gz
-  sha256: ef1cc372a1f5fb91b8824aecf9282742ee490a9eea966561738fa6fc471e4942
+  sha256: 996657cc4f85438d0f4a33b1657bb469d040a1b5161388c8dd481aba4c0c67f0
+  patches:
+    # The conda-forge `ninja` package ships no pip metadata, so `pip check`
+    # complains about the declared runtime dependency on ninja.
+    - patches/0001-drop-ninja-from-install-requires.patch
 
 build:
   number: 0
@@ -24,15 +28,17 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }},<3.14
-    - coremltools >=8.3
-    - numpy >=2,<2.4
+    - numpy >=2
     - pydantic >=2.0.0
     - rich >=13.0.0
-    - safetensors >=0.5.3,<=0.7.0
-    - pytorch >=2.8.0,<=2.11.0
-    - torchao >=0.15.0,<=0.17.0
+    - safetensors >=0.5.3
+    - pytorch >=2.8.0
+    - torchao >=0.15.0
     - tqdm >=4.65
-
+    - ninja >=1.11
+    - packaging >=23.0
+    - pyyaml >=6.0
+    - setuptools >=42
 tests:
   - python:
       python_version:

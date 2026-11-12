@@ -1,0 +1,33 @@
+From 8aa63be60b6019ba4eee423d798a96d8f0f94241 Mon Sep 17 00:00:00 2001
+From: "Uwe L. Korn" <uwe.korn@quantco.com>
+Date: Thu, 12 Nov 2026 20:21:37 +0000
+Subject: [PATCH] Drop ninja from the install_requires metadata
+
+ninja is used at runtime by torch.utils.cpp_extension to JIT-compile the
+vendored kmeans1d C++ core, but the conda-forge `ninja` package does not
+ship any Python packaging metadata (no .dist-info), so `pip check` always
+reports:
+
+    coreai-opt 0.4.0 requires ninja, which is not installed.
+
+even though ninja is present in the environment. The feedstock recipe
+keeps `ninja` as a runtime dependency, so the functional requirement is
+still satisfied; only the PyPI metadata no longer duplicates it.
+---
+ pyproject.toml | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 773d2bb..7ba2360 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -32,9 +32,6 @@ classifiers = [
+ ]
+ dynamic = [ "version" ]
+ dependencies = [
+-    # Required at runtime by torch.utils.cpp_extension to JIT-compile the vendored
+-    # kmeans1d C++ core (a C++ toolchain must also be present on the host).
+-    "ninja>=1.11",
+     "numpy>=2",
+     "packaging>=23.0",
+     "pydantic>=2.0.0",
