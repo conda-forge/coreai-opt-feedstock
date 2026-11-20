@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 0.4.0
+  version: "0.5.0"
 
 package:
   name: coreai-opt
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/coreai-opt/coreai_opt-${{ version }}.tar.gz
-  sha256: 996657cc4f85438d0f4a33b1657bb469d040a1b5161388c8dd481aba4c0c67f0
+  sha256: 3d95de231ba4e778cf75508fa9688b53275d8ec24283bbada42ad3fa41e04ef7
   patches:
     # The conda-forge `ninja` package ships no pip metadata, so `pip check`
     # complains about the declared runtime dependency on ninja.
